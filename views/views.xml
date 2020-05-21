@@ -1,60 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
 <odoo>
-  <data>
-    <!-- explicit list view definition -->
-<!--
-    <record model="ir.ui.view" id="payment_culqi.list">
-      <field name="name">payment_culqi list</field>
-      <field name="model">payment_culqi.payment_culqi</field>
-      <field name="arch" type="xml">
-        <tree>
-          <field name="name"/>
-          <field name="value"/>
-          <field name="value2"/>
-        </tree>
-      </field>
-    </record>
--->
+    <data>
 
-    <!-- actions opening views on models -->
-<!--
-    <record model="ir.actions.act_window" id="payment_culqi.action_window">
-      <field name="name">payment_culqi window</field>
-      <field name="res_model">payment_culqi.payment_culqi</field>
-      <field name="view_mode">tree,form</field>
-    </record>
--->
+        <record id="acquirer_form_culqi" model="ir.ui.view">
+            <field name="name">acquirer.form.culqi</field>
+            <field name="model">payment.acquirer</field>
+            <field name="inherit_id" ref="payment.acquirer_form"/>
+            <field name="arch" type="xml">
+                <xpath expr='//group[@name="acquirer"]' position='after'>
+                    <group attrs="{'invisible': [('provider', '!=', 'culqi')]}">
+                        <group>
+                                <field name="culqi_client_id"/>
+                                <field name="culqi_secret_key"/>
+     
+                        </group>
+                    </group>
+                </xpath>
+            </field>
+        </record>
 
-    <!-- server action to the one above -->
-<!--
-    <record model="ir.actions.server" id="payment_culqi.action_server">
-      <field name="name">payment_culqi server</field>
-      <field name="model_id" ref="model_payment_culqi_payment_culqi"/>
-      <field name="state">code</field>
-      <field name="code">
-        action = {
-          "type": "ir.actions.act_window",
-          "view_mode": "tree,form",
-          "res_model": model._name,
-        }
-      </field>
-    </record>
--->
 
-    <!-- Top menu item -->
-<!--
-    <menuitem name="payment_culqi" id="payment_culqi.menu_root"/>
--->
-    <!-- menu categories -->
-<!--
-    <menuitem name="Menu 1" id="payment_culqi.menu_1" parent="payment_culqi.menu_root"/>
-    <menuitem name="Menu 2" id="payment_culqi.menu_2" parent="payment_culqi.menu_root"/>
--->
-    <!-- actions -->
-<!--
-    <menuitem name="List" id="payment_culqi.menu_1_list" parent="payment_culqi.menu_1"
-              action="payment_culqi.action_window"/>
-    <menuitem name="Server to list" id="payment_culqi" parent="payment_culqi.menu_2"
-              action="payment_culqi.action_server"/>
--->
-  </data>
+    </data>
 </odoo>
